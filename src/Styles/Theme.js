@@ -8,6 +8,7 @@ export default {
   whiteColor: "#fff",
   blackColor: "#0b0b0b",
   grayColor: "#777",
+  darkGrayColor: "#1e272e",
 
   radius: "4px",
   border: "1px solid #777",
