@@ -14,7 +14,7 @@ const Content = () => {
     <WholeWrapper>
       <Route exact path="/" component={MM00} />
       <Route exact path="/signin" component={MM04} />
-      <Route exact path="/siginup" component={MM05} />
+      <Route exact path="/signup" component={MM05} />
     </WholeWrapper>
   );
 };

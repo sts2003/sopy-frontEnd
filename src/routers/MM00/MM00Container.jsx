@@ -1,5 +1,7 @@
 import React from "react";
+import { useQuery } from "react-apollo-hooks";
 import MM00Presenter from "../MM00/MM00Presenter";
+import { GET_ALL_VIDEOS } from "./MM00Queries";
 
 const MM00Container = () => {
   ///////////////////// - VARIABLE - ////////////////////////
@@ -11,11 +13,17 @@ const MM00Container = () => {
   ///////////////////// - USE CONTEXT - ////////////////////////
 
   ///////////////////// - USE QUERY - ////////////////////////
+  const {
+    data: videoDatum,
+    loading: videoLoading,
+    refetch: videoRefetch,
+  } = useQuery(GET_ALL_VIDEOS);
 
+  console.log(videoDatum && videoDatum.getAllVideos);
   ///////////////////// - USE MUTATION - ////////////////////////
 
   ///////////////////// - USE EFFECT - ////////////////////////
-  return <MM00Presenter />;
+  return <MM00Presenter videoDatum={videoDatum && videoDatum.getAllVideos} />;
 };
 
 export default MM00Container;
