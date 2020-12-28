@@ -89,7 +89,7 @@ const MM05Presenter = ({
   newName,
   newEmail,
   newNickName,
-  newMoblie,
+  newMobile,
   newZoneCode,
   newAddress,
   newDetailAddress,
@@ -105,12 +105,12 @@ const MM05Presenter = ({
         <TextInput type="text" placeholder={`E-MAIL...`} {...newEmail} />
         <TextInput type="text" placeholder={`NAME...`} {...newName} />
         <TextInput type="text" placeholder={`NICKNAME...`} {...newNickName} />
-        <TextInput type="text" placeholder={`MOBILE...`} {...newMoblie} />
+        <TextInput type="text" placeholder={`MOBILE...`} {...newMobile} />
         <LowWrapper>
           <TextInput
             type="text"
             width={`300px`}
-            placeholder={`32580`}
+            placeholder={`ZONECODE`}
             readOnly={true}
             {...newZoneCode}
           />
@@ -130,7 +130,7 @@ const MM05Presenter = ({
           {...newDetailAddress}
         />
 
-        <Button> SIGN UP! </Button>
+        <Button onClick={() => registUserHandler()}> SIGN UP! </Button>
       </Fade>
     </Wrapper>
   );
