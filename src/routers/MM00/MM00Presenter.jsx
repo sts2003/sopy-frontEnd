@@ -26,7 +26,32 @@ const WrapWrapper = styled(Wrapper)`
   flex-wrap: wrap;
 `;
 
-const MM00Presenter = ({ videoDatum }) => {
+const FileInput = styled.input`
+  display: none;
+`;
+
+const FileLabel = styled.label`
+  width: 120px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  cursor: pointer;
+  background-color: ${(props) => props.theme.checkColor};
+  color: #fff;
+  box-shadow: ${(props) => props.theme.boxShadow};
+  margin: 5px;
+  border-radius: ${(props) => props.theme.radius};
+`;
+
+const Image = styled.img`
+  width: 400px;
+  height: 400px;
+  border: 1px solid #777;
+  margin: 10px;
+  object-fit: cover;
+`;
+
+const MM00Presenter = ({ videoDatum, fileChangeHandler, imagePath }) => {
   return (
     <Wrapper>
       <Wrapper height={`400px`} padding={`25px`} dr={`row`}>
@@ -84,6 +109,12 @@ const MM00Presenter = ({ videoDatum }) => {
           </WrapWrapper>
         </Fade>
       </Wrapper>
+      {/* FILE UPLOAD TEST START*/}
+      <Image src={imagePath}></Image>
+      <FileInput type="file" id="file-js" onChange={fileChangeHandler} />
+      <FileLabel htmlFor="file-js">파일 선택</FileLabel>
+      {/*파일은 하나밖에 선택이 안되기 때문에 해쉬태그(태그방식)을 사용하고 밑에 +를 누르면 하나씩하나씩 복수로 파일을 처리가 가능함.*/}
+      {/* FILE UPLOAD TEST END*/}
     </Wrapper>
   );
 };

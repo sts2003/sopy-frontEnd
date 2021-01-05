@@ -1,10 +1,10 @@
 # SOPY PROJECT
 
-- [ ] MM00: MAIN
+- [] MM00: MAIN
 - [ ] MM01: DETAIL
 - [ ] MM02: UPLOAD
 - [ ] MM03: UPDATE
-- [ ] MM04: SIGN IN
-- [ ] MM05: SIGN UP
+- [x] MM04: SIGN IN
+- [x] MM05: SIGN UP
 - [ ] MM06: MY PAGE
 - [ ] MM07: PRIVACY
