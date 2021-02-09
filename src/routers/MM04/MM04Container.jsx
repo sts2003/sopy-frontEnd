@@ -46,18 +46,23 @@ const MM04Container = ({ history }) => {
       },
     });
 
-    if (data.checkSecretCode) {
+    if (data.checkSecretCode.result) {
       alert("로그인 성공 !!");
+
+      sessionStorage.setItem(
+        "QW*E*(GSDGVQWVEqQWddQWEQEOk",
+        data.checkSecretCode.objectId
+      );
+      window.location.reload();
       history.push("/");
+      // 사용자 데이터를 JWT TOKEN으로 생성하여 가져온다.
+      // 크롬에서 PASSPORT TOKEN을 통해 session에 토큰을 저장하고,
+      // 모든 화면에서는 login 상태를 알기 위한 redux || contextAPI를
+      // 세팅하여 로그인 상태를 유지하기 위한 처리를 한다.
     } else {
       alert("인증코드가 잘못되었습니다.");
     }
   };
-
-  // 사용자 데이터를 JWT TOKEN으로 생성하여 가져온다.
-  // 크롬에서 PASSPORT TOKEN을 통해 session에 토큰을 저장하고,
-  // 모든 화면에서는 login 상태를 알기 위한 redux || contextAPI를
-  // 세팅하여 로그인 상태를 유지하기 위한 처리를 한다.
 
   return (
     <MM04Presenter

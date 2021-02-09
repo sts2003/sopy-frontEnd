@@ -1,6 +1,11 @@
 import React from "react";
-import { Wrapper, ImageBox } from "../../components/commonComponents";
+import {
+  Wrapper,
+  ImageBox,
+  CommonBtn,
+} from "../../components/commonComponents";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { Fade, Bounce } from "react-reveal";
 
 const ViewText = styled.div`
@@ -51,7 +56,29 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-const MM00Presenter = ({ videoDatum, fileChangeHandler, imagePath }) => {
+const RelWrapper = styled(Wrapper)`
+  position: relative;
+`;
+
+const AbImageBox = styled(ImageBox)`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+const AbWrapper = styled(Wrapper)`
+  position: absolute;
+  top: 2px;
+  right: 2px;
+`;
+
+const MM00Presenter = ({
+  videoDatum,
+  fileChangeHandler,
+  imagePath,
+  videoDeleteHandler,
+  updateHandler,
+}) => {
   return (
     <Wrapper>
       <Wrapper height={`400px`} padding={`25px`} dr={`row`}>
@@ -63,7 +90,7 @@ const MM00Presenter = ({ videoDatum, fileChangeHandler, imagePath }) => {
               bgImg={
                 "https://firebasestorage.googleapis.com/v0/b/leafsts-fileserver.appspot.com/o/SOPY%2FvideoThumbnail%2F%ED%98%B8%EB%82%98%EC%9A%B0%EB%91%90%20%EC%B6%95%EC%8B%A0%EC%A7%A4.png?alt=media&token=1213e064-0c67-4e86-aec6-6e64b96bf705"
               }
-            ></ImageBox>
+            />
           </Wrapper>
         </Fade>
         <Fade right>
@@ -93,12 +120,29 @@ const MM00Presenter = ({ videoDatum, fileChangeHandler, imagePath }) => {
                 videoDatum.map((data, idx) => {
                   return (
                     <Fade bottom delay={idx * 60} key={idx}>
-                      <ImageBox
+                      <RelWrapper
                         width={`400px`}
                         height={`225px`}
                         margin={`5px`}
-                        bgImg={data.thumbNailPath}
-                      />
+                      >
+                        <AbImageBox
+                          width={`400px`}
+                          height={`225px`}
+                          bgImg={data.thumbNailPath}
+                        />
+                        <AbWrapper width={`60px`} height={`50px`} dr={`row`}>
+                          <CommonBtn
+                            isUpdate={true}
+                            height={`10px`}
+                            onClick={() => updateHandler(data._id)}
+                          ></CommonBtn>
+                          <CommonBtn
+                            isDelete={true}
+                            height={`10px`}
+                            onClick={() => videoDeleteHandler(data._id)}
+                          ></CommonBtn>
+                        </AbWrapper>
+                      </RelWrapper>
                     </Fade>
                   );
                 })
@@ -115,6 +159,11 @@ const MM00Presenter = ({ videoDatum, fileChangeHandler, imagePath }) => {
       <FileLabel htmlFor="file-js">파일 선택</FileLabel>
       {/*파일은 하나밖에 선택이 안되기 때문에 해쉬태그(태그방식)을 사용하고 밑에 +를 누르면 하나씩하나씩 복수로 파일을 처리가 가능함.*/}
       {/* FILE UPLOAD TEST END*/}
+      <Wrapper margin={`50px 0px`}>
+        <Link to={"/video/upload"}>
+          <CommonBtn isCreate={true}>동영상 업로드</CommonBtn>
+        </Link>
+      </Wrapper>
     </Wrapper>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
@@ -44,20 +44,41 @@ const Header = ({ history }) => {
     history.push(link);
   };
 
+  const [login, setLogin] = useState(
+    sessionStorage.getItem("QW*E*(GSDGVQWVEqQWddQWEQEOk" || "-")
+  );
+
+  useEffect(() => {
+    setLogin(sessionStorage.getItem("QW*E*(GSDGVQWVEqQWddQWEQEOk" || "-"));
+  }, []);
+
+  console.log(login);
+
   return (
     <HeaderWrapper>
       <InnerWrapper width={`200px`}></InnerWrapper>
       <InnerWrapper>
         <ActionSpan onClick={() => moveLinkHandler("/")}>LOGO</ActionSpan>
       </InnerWrapper>
-      <InnerWrapper width={`200px`}>
-        <ActionSpan onClick={() => moveLinkHandler("/signin")}>
-          SIGN IN
-        </ActionSpan>
-        <ActionSpan onClick={() => moveLinkHandler("/signup")}>
-          SIGN UP
-        </ActionSpan>
-      </InnerWrapper>
+      {login !== null ? (
+        <InnerWrapper width={`200px`}>
+          <ActionSpan onClick={() => moveLinkHandler("/signin")}>
+            MyVideo
+          </ActionSpan>
+          <ActionSpan onClick={() => moveLinkHandler("/signup")}>
+            UpLoad
+          </ActionSpan>
+        </InnerWrapper>
+      ) : (
+        <InnerWrapper width={`200px`}>
+          <ActionSpan onClick={() => moveLinkHandler("/signin")}>
+            SIGN IN
+          </ActionSpan>
+          <ActionSpan onClick={() => moveLinkHandler("/signup")}>
+            SIGN UP
+          </ActionSpan>
+        </InnerWrapper>
+      )}
     </HeaderWrapper>
   );
 };

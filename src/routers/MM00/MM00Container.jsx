@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useQuery } from "react-apollo-hooks";
+import React, { useState, useEffect } from "react";
+import { useQuery, useMutation } from "react-apollo-hooks";
 import MM00Presenter from "../MM00/MM00Presenter";
-import { GET_ALL_VIDEOS } from "./MM00Queries";
+import { DELETE_VIDEO, GET_ALL_VIDEOS } from "./MM00Queries";
 import storageRef from "../../../src/firebase";
 
-const MM00Container = () => {
+const MM00Container = ({ history }) => {
   ///////////////////// - VARIABLE - ////////////////////////
 
   ///////////////////// - USE STATE - ////////////////////////
@@ -22,8 +22,12 @@ const MM00Container = () => {
 
   console.log(videoDatum && videoDatum.getAllVideos);
   ///////////////////// - USE MUTATION - ////////////////////////
+  const [deleteVideoMutation] = useMutation(DELETE_VIDEO);
 
   ///////////////////// - USE EFFECT - ////////////////////////
+  useEffect(() => {
+    videoRefetch();
+  }, []);
 
   const fileChangeHandler = async (e) => {
     console.log(e.target.files[0]);
@@ -60,11 +64,33 @@ const MM00Container = () => {
     } catch (e) {}
     // catch를 잡을 때 콘솔로그를 찍으면 사용자에게 에러가 보이기 때문에 사용 X
   };
+
+  const videoDeleteHandler = async (id) => {
+    const { data } = await deleteVideoMutation({
+      variables: {
+        id,
+      },
+    });
+
+    if (data.deleteVideo) {
+      alert("비디오가 삭제되었습니다.");
+      videoRefetch();
+    } else {
+      alert("비디오 삭제에 실패했습니다.");
+    }
+  };
+
+  const updateHandler = (id) => {
+    history.push(`/video/modify/${id}`);
+  };
+
   return (
     <MM00Presenter
       videoDatum={videoDatum && videoDatum.getAllVideos}
       fileChangeHandler={fileChangeHandler}
       imagePath={imagePath}
+      videoDeleteHandler={videoDeleteHandler}
+      updateHandler={updateHandler}
     />
   );
 };
